@@ -2,9 +2,14 @@ package kr.co.hanbit.product.management;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+
+
+import javax.sql.DataSource; //데이터 베이스
+import java.sql.Connection;
 
 @SpringBootApplication
 public class Application {
@@ -26,5 +31,13 @@ public class Application {
 				.setFieldMatchingEnabled(true);
 
 		return modelMapper;
+	}
+
+	@Bean
+	public ApplicationRunner runner(DataSource dataSource) {
+		return args -> {
+			//실행할 코드
+			Connection connection = dataSource.getConnection();
+		};
 	}
 }

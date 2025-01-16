@@ -25,8 +25,35 @@ public class Product {
     @Min(0)
     private Integer amount; //재고수량
 
+    //데이터베이스에서 Product의 인스턴스 값을 가져와야되는 상황 (아직 id는 필요 x)
+    //기술적인 문제로 getter를 반드시 추가해야되는 상황이기에 추가 (허나 꼭 필요한 곳에서만 사용해야됨).
+    public Integer getPrice() {
+        return price;
+    }
+    public String getName() {
+        return name;
+    }
+    public Integer getAmount() {
+        return amount;
+    }
+    //update 메소드 사용 시 id에 대한 값 매핑이 필요하여 추가
+    public Long getId() {
+        return id;
+    }
+
     public void setId(Long id) {
         this.id = id;
+    }
+
+    //BeanPropertyRowMapper의 조건 충족을 위해 setter 추가
+    public void setName (String name) {
+        this.name = name;
+    }
+    public void setPrice( Integer price) {
+        this.price = price;
+    }
+    public void setAmount( Integer amount) {
+        this.amount = amount;
     }
 
     public Boolean sameID(Long id){

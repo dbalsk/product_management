@@ -10,5 +10,4 @@ public class ValidationService {
     public <T> void checkValid(@Valid T validationTarget){
         //인자를 담아 호출만으로도 유효성 검증이 이뤄지기에 아무것도 없음.
     }
-
 }
