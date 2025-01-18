@@ -12,7 +12,7 @@
 
 ### ✔ 구현 내용
   - **[상품관리애플리케이션 - 리스트](https://github.com/dbalsk/TIL/blob/main/SpringBoot/%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98.md)**
-  - **[상품관리애플리케이션 - 데이터베이스]()**
+  - **[상품관리애플리케이션 - 데이터베이스](https://github.com/dbalsk/TIL/blob/main/DataBase/%EC%83%81%ED%92%88%EA%B4%80%EB%A6%AC%EC%95%A0%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98_DB.md)**
    
 ### ✔ 고려할 요소
   1. **도메인 주도 설계 (Domain Driven Design)**
