@@ -6,6 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 
 
 import javax.sql.DataSource; //데이터 베이스
@@ -34,6 +35,7 @@ public class Application {
 	}
 
 	@Bean
+	@Profile("prod") //데이터베이스 사용 시에만 수행
 	public ApplicationRunner runner(DataSource dataSource) {
 		return args -> {
 			//실행할 코드

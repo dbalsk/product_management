@@ -2,16 +2,20 @@ package kr.co.hanbit.product.management.infrastructure;
 
 import kr.co.hanbit.product.management.domain.EntityNotFoundException;
 import kr.co.hanbit.product.management.domain.Product;
+import kr.co.hanbit.product.management.domain.ProductRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Repository
-//빈으로 등록됨.
-public class ListProductRepository {
-    //인프라스트럭쳐 계층
+//리스트로 데이터 저장하는 레포지토리
+//현재는 DatabaseProductRepository로 변경하여 사용x
+
+@Repository //빈으로 등록됨.
+@Profile("test") //로컬 개발환경에서 기능 테스트(test)할 때 사용
+public class ListProductRepository implements ProductRepository {
 
     private List<Product> products = new CopyOnWriteArrayList<>();
     //웹애플리케이션은 멀티 스레드이기에 '스레드 세이프' 한 컬렉션 사용필요.
@@ -33,7 +37,7 @@ public class ListProductRepository {
         return product;
     }
 
-    public Product findByID(Long id){
+    public Product findById(Long id){
         //상품 번호로 조회 기능 구현 메소드
         return products.stream()
                 .filter(product -> product.sameID(id))
@@ -68,7 +72,7 @@ public class ListProductRepository {
     }
 
     public void delete(Long id) {
-        Product product = this.findByID(id);
+        Product product = this.findById(id);
         products.remove(product);
     }
 }
