@@ -1,9 +1,11 @@
 package kr.co.hanbit.product.management.infrastructure;
 
+import kr.co.hanbit.product.management.domain.EntityNotFoundException;
 import kr.co.hanbit.product.management.domain.Product;
 import kr.co.hanbit.product.management.domain.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -59,14 +61,23 @@ public class DatabaseProductRepository implements ProductRepository{
         //SqlParameterSource로 id를 매핑해주기 위해  MapSqlParameterSource 사용
         //Key-Value 형태를 매핑하는 경우 사용 (BeanPropertySqlParameterSource는 객체를 매핑)
 
-        //3가지 인자 받아야함.
-        Product product = namedParameterJdbcTemplate.queryForObject(
-                "SELECT id, name, price, amount FROM products WHERE id=:id", //1. sql 쿼리 받기
-                namedParameter, //2. namedParamenter 받기
-                new BeanPropertyRowMapper<>(Product.class) //3. BeanPropertyRowMapper 받기 (조회된 상품 정보를 Product 인스턴스로 변환)
-                //BeanPropertyRowMapper가 변환을 수행하기위해 2가지 과정 필요
-                //1. 인자가 없는 product 생성자 필요 2. setter로 각 필드 초기화 필요
-        );
+        Product product = null;
+        //예외처리를 위한 try-catch (허나, try-catch는 가독성을 떨어뜨리기에 사용 자제해야함)
+        try{
+            product = namedParameterJdbcTemplate.queryForObject(
+                    //3가지 인자 받아야함.
+                    "SELECT id, name, price, amount FROM products WHERE id=:id", //1. sql 쿼리 받기
+                    namedParameter, //2. namedParamenter 받기
+                    new BeanPropertyRowMapper<>(Product.class) //3. BeanPropertyRowMapper 받기 (조회된 상품 정보를 Product 인스턴스로 변환)
+                    //BeanPropertyRowMapper가 변환을 수행하기위해 2가지 과정 필요
+                    //1) 인자가 없는 product 생성자 필요  2) setter로 각 필드 초기화 필요
+            );
+        }catch(EmptyResultDataAccessException exception){
+            //DatabaseProductRepository에서는 별도로 예외처리 해주지 않았음. 그렇기에 예외 발생 시 EmptyResultDataAccessException 발생
+            //이 예외를 잡아서 EntityNotFoundException로 새로 던져줘 예외 처리
+            throw new EntityNotFoundException("Product를 찾지 못했습니다.");
+        }
+
         return product;
     }
 

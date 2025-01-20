@@ -25,6 +25,9 @@ public class Product {
     @Min(0)
     private Integer amount; //재고수량
 
+    public Product(){
+    }
+
     //데이터베이스에서 Product의 인스턴스 값을 가져와야되는 상황 (아직 id는 필요 x)
     //기술적인 문제로 getter를 반드시 추가해야되는 상황이기에 추가 (허나 꼭 필요한 곳에서만 사용해야됨).
     public Integer getPrice() {

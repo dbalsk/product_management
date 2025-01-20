@@ -17,6 +17,15 @@ public class ProductDto {
     @NotNull
     private Integer amount; //재고수량
 
+    public ProductDto(){
+    }
+
+    public ProductDto(String name, Integer price, Integer amount) {
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+
     //getter로 HTTP 응답을 줌.
     public Long getId() {
 
