@@ -14,14 +14,15 @@ import static org.junit.jupiter.api.Assertions.*;
 //그래서 Assertions.assertTrue가 아닌 assertTrue 즉 메소드명만으로도 사용 가능
 
 @SpringBootTest //스프링 컨테이너가 뜨는 통합 테스트 (실행까지 시간이 조금 더 걸리는 단점은 있음)
-@ActiveProfiles("prod") //테스트 코드에서 사용할 profile 지정
+@ActiveProfiles("test") //테스트 코드에서 사용할 profile 지정 (기본값은 list 사용하는 애플리케이션이기에 현재는 "test")
 class SimpleProductServiceTest {
 
     @Autowired //simpleProductService 의존성 주입
     SimpleProductService  simpleProductService;
 
-    @Transactional //트랜잭셔널한 처리를 위해 사용, 테스트 코드에 사용할 경우 테스트 후 커밋이 아닌 롤백해줌.
-    // -> 테스트 코드에서 추가한 데이터가 실제로 데이터베이스에는 반영x
+    //@Transactional //트랜잭셔널한 처리를 위해 사용, 테스트 코드에 사용할 경우 테스트 후 커밋이 아닌 롤백해줌.
+    //테스트 코드에서 추가한 데이터가 실제로 데이터베이스에는 반영x
+    //현재는 기본값을 list를 사용하는 애플리케이션으로 하기에 주석처리 (데이터베이스 사용 시, 테스트를 할때 주석 해제)
     @Test //테스트 코드라는 의미
     @DisplayName("상품을 추가한 후 id로 조회하면 해당 상품이 조회되어야 한다.") //이름 지정
     void productAddAndFindByIdTest (){

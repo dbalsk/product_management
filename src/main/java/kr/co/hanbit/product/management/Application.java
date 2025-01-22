@@ -1,7 +1,7 @@
 package kr.co.hanbit.product.management;
 
-import org.modelmapper.ModelMapper;
-import org.modelmapper.config.Configuration;
+//import org.modelmapper.ModelMapper;
+//import org.modelmapper.config.Configuration;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,6 +20,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
+/*	1/22 ModelMapper 제거
 	@Bean
 	//ModelMapper 클래스의 인스턴스 생성하고 빈으로 등록하는 코드.
 	public ModelMapper modelMapper(){
@@ -32,7 +33,7 @@ public class Application {
 				.setFieldMatchingEnabled(true);
 
 		return modelMapper;
-	}
+	}*/
 
 	@Bean
 	@Profile("prod") //데이터베이스 사용 시에만 수행

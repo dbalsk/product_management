@@ -28,7 +28,14 @@ public class Product {
     public Product(){
     }
 
-    //데이터베이스에서 Product의 인스턴스 값을 가져와야되는 상황 (아직 id는 필요 x)
+    public Product(Long id, String name, Integer price, Integer amount) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+        this.amount = amount;
+    }
+
+    //데이터베이스에서 Product의 인스턴스 값을 가져와야되는 상황
     //기술적인 문제로 getter를 반드시 추가해야되는 상황이기에 추가 (허나 꼭 필요한 곳에서만 사용해야됨).
     public Integer getPrice() {
         return price;
