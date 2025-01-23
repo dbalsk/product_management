@@ -19,7 +19,7 @@ public class SimpleProductService {
     //private ModelMapper modelMapper; 1/22 - ModelMapper 제거
     private ValidationService validationService;
 
-    @Autowired //의존성을 주입.
+    @Autowired //의존성을 주입. //단위테스트 시 두 의존성에 목객체가 주입
     SimpleProductService(ProductRepository productRepository, ValidationService validationService){
         this.productRepository = productRepository;
         this.validationService = validationService;
@@ -28,8 +28,7 @@ public class SimpleProductService {
     public ProductDto add(ProductDto productDto){
         Product product = ProductDto.toEntity(productDto); //ProductDto를 Product로 변환
         validationService.checkValid(product); //변환 직후 유효성 검사
-
-        Product savedProduct = productRepository.add(product); //레포지토리 호출
+        Product savedProduct = productRepository.add(product);
         ProductDto savedProductDto = ProductDto.toDto(savedProduct); //Product를 ProductDto로 변환
         return savedProductDto;
     }

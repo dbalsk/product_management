@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 //import static으로 클래스 이름 생략하게 해줌
 //그래서 Assertions.assertTrue가 아닌 assertTrue 즉 메소드명만으로도 사용 가능
 
-@SpringBootTest //스프링 컨테이너가 뜨는 통합 테스트 (실행까지 시간이 조금 더 걸리는 단점은 있음)
+@SpringBootTest //스프링 컨테이너가 뜨는 **통합 테스트** (실행까지 시간이 조금 더 걸리는 단점은 있음)
 @ActiveProfiles("test") //테스트 코드에서 사용할 profile 지정 (기본값은 list 사용하는 애플리케이션이기에 현재는 "test")
 class SimpleProductServiceTest {
 
